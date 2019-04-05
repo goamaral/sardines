@@ -14,7 +14,6 @@ router.get(routes['website_sign_in'], (_, res) => {
 
 router.post(routes['website_sign_in'], (req, res) => {
   res.send(req.body)
-  
 })
 
 router.get(routes['website_sign_up'], (_, res) => {
