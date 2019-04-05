@@ -1,0 +1,22 @@
+<section>
+  <form action="<%= routes['website_sign_up'] %>">
+    <label for="username">Email</label>
+    <input type="email" name="username">
+
+    <label for="username">Username</label>
+    <input type="text" name="username">
+
+    <label for="password">Password</label>
+    <input type="password" name="password">
+
+    <label for="password">Password confirmation</label>
+    <input type="password" name="password_confirmation">
+
+    <p>
+      <input type="checkbox" name="terms_accepted">
+      I accept the <a href="<%= routes['website_terms'] %>">terms</a>
+    </p>
+
+    <input type="submit" value="Register">
+  </form>
+</section>

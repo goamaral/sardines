@@ -1,0 +1,27 @@
+<section class="row center-md">
+  <div class="col-md-6">
+    <form action="<%= routes['website_sign_in'] %>" method="POST" >
+      <label for="username">Email or Username</label>
+      <input type="text" name="username" class="text-input">
+
+      <label for="password">Password<a href="<%= routes['website_forgot_password'] %>">Forgot password?</a></label>
+      <input type="password" name="password" class="text-input">
+
+      <div class="row">
+        <div class="col-md-6">
+          <input type="submit" value="Login" class="button">
+        </div>
+
+        <div class="col-md-6">
+          <a href="<%= routes['website_sign_up'] %>">
+            <input value="Register" class="button">
+          </a>
+        </div>
+      </div>
+    </form>
+
+    <a href="#">Google</a>
+    <a href="#">Facebook</a>
+    <a href="#">Twitter</a>
+    <a href="#">Github</a>
+  </div>
