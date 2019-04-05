@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  web:
+    container_name: sardines-web
+    build:
+      dockerfile: docker/development/dockerfile
+      context: .
+    image: sardines_web
+    volumes:
+      - .:/project
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+      - mailhog
+
+  postgres:
+    container_name: sardines-postgres
+    image: postgres
+    environment:
+      POSTGRES_USER: sardines
+      POSTGRES_PASSWORD: sardines
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  mailhog:
+    container_name: sardines-mailhog
+    image: mailhog/mailhog
+
+volumes:
+  postgres_data:
