@@ -1,16 +1,22 @@
-<h1>Login</h1>
+<div class="submission">
+  <div class="grid-submission">
 
-<form action="<%= routes['website_sign_in'] %>" method="post" >
-  <label for="username">Email or Username</label>
-  <input type="text" name="username" class="text-input">
-
-  <br>
-  <label for="password">Password<%= errors["password"] ? ` (${errors["password"]})` : '' %></label>
-  <input type="password" name="password" class="text-input">
-
-  <br>
-  <a href="<%= routes['website_forgot_password'] %>">Recuperar password</a>
-
-  <br>
-  <input type="submit" value="Login" class="button">
-</form>
+  <form action="<%= routes['website_sign_in'] %>" method="post" >
+    <div class="submission-title">LOGIN</div>
+    <div class="expression">
+      <label for="username">Email or Username</label>
+      <input type="text" name="username" class="text-input">
+    </div>
+    <div class="description">
+      <label for="password">Password<%= errors["password"] ? ` (${errors["password"]})` : '' %></label>
+      <input type="password" name="password" class="text-input">
+    </div>
+    <div class="description recovery">
+      <a href="<%= routes['website_forgot_password'] %>">Recuperar password</a>
+    </div>
+    <div class="submit">
+      <input type="submit" value="Login" class="button">
+    </div>
+  </form>
+  </div>
+</div>
