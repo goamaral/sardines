@@ -17,8 +17,13 @@ router.get('/submission', (_, res) => {
 
 router.post('/submission', async (req, res) => {
   let errors = {}
+  let slug = req.body.expression.trim()
+    .toLowerCase()
+    .replace(/[^a-zA-Z0-9 _]/, "")
+    .replace(/\s/g, "_")
 
   let params = {
+    slug,
     expression: req.body.expression,
     description: req.body.description,
     origin: req.body.description,
