@@ -21,6 +21,7 @@ router.post('/sign_in', (req, res) => {
       return render_view(res, 'website/sign_in', { errors: { password: "Incorrect password" } })
     }
 
+    req.session.user_id = user.id
     res.redirect(routes['platform_index'])
   }
 
@@ -63,6 +64,7 @@ router.post('/sign_up', (req, res) => {
     if (Object.keys(errors).length) {
       render_view(res, 'website/sign_up', { errors })
     } else {
+      req.session.user_id = user.id
       res.redirect(routes['platform_index'])
     }
   })
