@@ -2,13 +2,13 @@ import mongoose from 'mongoose'
 import bluebird from 'bluebird'
 import User from './User'
 import Submission from './Submission'
+import env from '../env.json'
 
 mongoose.Promise = bluebird
 
-const DB_URL = 'mongodb://user:secret19@ds133256.mlab.com:33256/gogocat'
-mongoose.connect(DB_URL, { useNewUrlParser: true });
+mongoose.connect(env["mongo_url"], { useNewUrlParser: true });
 
-console.log(`Connected to mongo at ${DB_URL}`)
+console.log(`Connected to mongo at ${env["mongo_url"]}`)
 
 export {
   User,
