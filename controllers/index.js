@@ -1,3 +1,4 @@
 import website from './website'
+import platform from './platform'
 
-export default { website }
+export default { website, platform }

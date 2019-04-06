@@ -1,12 +1,16 @@
+<h1>Login</h1>
+
 <form action="<%= routes['website_sign_in'] %>" method="POST" >
   <label for="username">Email or Username</label>
   <input type="text" name="username" class="text-input">
 
-  <label for="password">Password<a href="<%= routes['website_forgot_password'] %>">Forgot password?</a></label>
+  <br>
+  <label for="password">Password<%= errors["password"] ? ` (${errors["password"]})` : '' %></label>
   <input type="password" name="password" class="text-input">
 
+  <br>
+  <a href="<%= routes['website_forgot_password'] %>">Forgot password?</a>
+
+  <br>
   <input type="submit" value="Login" class="button">
-  <a href="<%= routes['website_sign_up'] %>">
-    <input value="Register" type="button">
-  </a>
 </form>

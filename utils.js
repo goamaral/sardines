@@ -18,12 +18,12 @@ const render_view = (res, slug, view_props={}) => {
   })
 }
 
-const hash_password = async password => {
-  return await bcrypt.hash(password, SALT_ROUNDS)
+const hash_password = password => {
+  return bcrypt.hashSync(password, SALT_ROUNDS)
 }
 
-const compare_password = async (password, encrypted) => {
-  return await bcrypt.compare(password, encrypted)
+const compare_password = (password, encrypted) => {
+  return bcrypt.compareSync(password, encrypted)
 }
 
 export { render_view, hash_password, compare_password }
