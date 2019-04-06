@@ -26,4 +26,12 @@ const compare_password = (password, encrypted) => {
   return bcrypt.compareSync(password, encrypted)
 }
 
-export { render_view, hash_password, compare_password }
+const auth = (req, res, next) => {
+  if (!req.session.user_id) {
+    res.redirect(routes['website_sign_in'])
+  } else {
+    next()
+  }
+}
+
+export { render_view, hash_password, compare_password, auth }
