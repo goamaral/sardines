@@ -4,6 +4,8 @@
 <div class="grid-container">
   <div class="header">RECENTES</div>
   <% recent_submissions.forEach((submission, i) => { %>
-    <div class="card card_<%= i %>"><%= submission.expression %></div>
+    <a class="card card_<%= i %>" href="<%= routes['website_submission'] %>/<%= submission.slug %>">
+      <%= submission.expression %>
+    </a>
   <% }); %>
 </div>

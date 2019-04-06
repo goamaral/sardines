@@ -67,6 +67,17 @@ router.post('/sign_up', async (req, res) => {
     } else {
       errors["email"] = errors["username"] = "Utilizador já esxite"
     }
+
+    render_view(res, 'website/sign_up', { errors })
+  }
+})
+
+router.get('/submission/:slug', async (req, res) => {
+  try {
+    let submission = await Submission.findOne({ slug: req.params.slug })
+    render_view(res, 'website/submission', { submission })
+  } catch {
+    render_view(res, 'website/submission', { submission: false })
   }
 })
 
