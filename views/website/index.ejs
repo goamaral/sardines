@@ -1,38 +1,9 @@
 <a href="<%= routes['website_sign_in'] %>">Login</a>
 <a href="<%= routes['website_sign_up'] %>">Register</a>
-<!-- <div class="row center-md middle-md" id='content'>
-  <section id="left" class="col-md-3">
-    <p class="bold fs-2">Boost your productivity</p>
-    <p class="bold fs-2 item-2">Dash through your tasks like a ninja</p>
-  </section>
-
-  <div id="divider" class="col-md-offset-2"></div>
-
-  <section id="right" class="col-md-3 col-md-offset-2">
-    <a class='button bold fs-2' href="<%= routes['website_sign_in'] %>">Login</a>
-    <a class='button bold fs-2 item-2' href="<%= routes['website_sign_up'] %>">Register</a>
-  </section>
-</div> -->
 
 <div class="grid-container">
   <div class="header">RECENTES</div>
-  <div class="card card_1">"Quem está de fora racha lenha"</div>
-  <div class="card card_2">3</div>
-  <div class="card card_3">4</div>
-  <div class="card card_4">5</div>
-  <div class="card card_5">6</div>
-  <div class="card card_6">7</div>
+  <% recent_submissions.forEach((submission, i) => { %>
+    <div class="card card_<%= i %>"><%= submission.expression %></div>
+  <% }); %>
 </div>
-
-<div class="grid-container">
-  <div class="header">RECENTES</div>
-  <div class="card card_1">"Quem está de fora racha lenha"</div>
-  <div class="card card_2">3</div>
-  <div class="card card_3">4</div>
-  <div class="card card_4">5</div>
-  <div class="card card_5">6</div>
-  <div class="card card_6">7</div>
-</div>
-
-<a href="<%= routes['website_sign_in'] %>">Login</a>
-<a href="<%= routes['website_sign_up'] %>">Register</a>

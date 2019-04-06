@@ -1,15 +1,21 @@
 <div class="submission">
   <div class="grid-submission">
-    <form action="/action_page.php">
+    <form action="<%= routes['platform_submission'] %>" method="post">
       <div class="submission-title">SUBMISSÃO</div>
       <div class="expression">
-        <p>Expressão</p>
-        <input type="text" name="expression">
+        <p>Expressão<%= errors["expression"] ? ` (${errors["expression"]})` : '' %></p>
+        <input type="text" name="expression" />
       </div>
-      <div class="region">
-        <p>Região de Origem</p>
-        <input type="text" name="region">
+      <div class="description">
+        <p>Descrição<%= errors["description"] ? ` (${errors["description"]})` : '' %></p>
+        <textarea name="description"></textarea>
       </div>
+      <div class="origin">
+        <p>Região de Origem<%= errors["origin"] ? ` (${errors["origin"]})` : '' %></p>
+        <input type="text" name="origin" />
+      </div>
+
+      <input type="submit" value="Registar">
     </form>
   </div>
 </div>

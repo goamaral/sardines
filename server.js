@@ -2,6 +2,7 @@ import express from 'express'
 import controllers from './controllers'
 import db from './models'
 import session from 'express-session'
+import mongoose from 'mongoose'
 
 const app = express()
 app.set('view engine', 'ejs')
@@ -11,7 +12,12 @@ app.set('trust proxy', 1)
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static('public'))
-app.use(session({ secret: 'gogocat', resave: false, saveUninitialized: true }))
+app.use(session({
+  secret: 'gogocat',
+  resave: false,
+  saveUninitialized: true,
+  user_id: mongoose.Types.ObjectId("5ca8c675dc59c21e25fafec4")
+}))
 
 // Routing
 app.use('/', controllers.website)
