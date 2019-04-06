@@ -2,20 +2,25 @@
   <div class="grid-submission">
     <form action="<%= routes['platform_submission'] %>" method="post">
       <div class="submission-title">SUBMISSÃO</div>
+
       <div class="expression">
         <p>Expressão<%= errors["expression"] ? ` (${errors["expression"]})` : '' %></p>
         <input type="text" name="expression" />
       </div>
+
       <div class="description">
         <p>Descrição<%= errors["description"] ? ` (${errors["description"]})` : '' %></p>
-        <textarea name="description"></textarea>
-      </div>
-      <div class="origin">
-        <p>Região de Origem<%= errors["origin"] ? ` (${errors["origin"]})` : '' %></p>
-        <input type="text" name="origin" />
+        <textarea rows="8" lines="8" name="description"></textarea>
       </div>
 
-      <input type="submit" value="Registar">
+      <div class="origin">
+        <p>Região de Origem<%= errors["origin"] ? ` (${errors["origin"]})` : '' %></p>
+        <input type="text" name="origin">
+      </div>
+
+      <div class="submit">
+        <input type="submit" value="Criar">
+      </div>
     </form>
   </div>
 </div>
