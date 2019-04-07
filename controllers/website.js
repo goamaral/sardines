@@ -103,10 +103,8 @@ router.post('/forgot_password', async (req, res) => {
     let new_password = password_generator.generate({ length: 10, numbers: true })
     user.password = hash_password(new_password)
     user.save()
-    await send_forgot_password_email(req.body.email, new_password)
-  } catch (err) {
-    console.log("FAILED TO SEND EMAIL " + err)
-  }
+    send_forgot_password_email(req.body.email, new_password)
+  } catch {}
 
   render_view(res, 'website/forgot_password', { email_sent: true })
 })
