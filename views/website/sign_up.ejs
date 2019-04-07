@@ -2,7 +2,7 @@
   <div class="grid-submission">
 
   <form action="<%= routes['website_sign_up'] %>" method="post" >
-    <div class="submission-title">REGISTO</div>
+    <div class="submission-title">REGISTAR</div>
 
     <div class="expression">
       <label for="email">Email<%= errors["email"] ? ` (${errors["email"]})` : '' %></label>
@@ -15,13 +15,14 @@
     </div>
 
     <div class="description">
-      <label for="password">Palavra-Passe<%= errors["password"] ? ` (${errors["password"]})` : '' %></label>
+      <label for="password">Password<%= errors["password"] ? ` (${errors["password"]})` : '' %></label>
       <input type="password" name="password" class="text-input">
     </div>
 
     <div class="description">
-      <label for="password_confirmation">Confirmação password
-      <%= errors["password_confirmation"] ? ` (${errors["password_confirmation"]})` : '' %>
+      <label for="password_confirmation">
+        Confirmação password<%= errors["password_confirmation"] ? ` (${errors["password_confirmation"]})` : '' %>
+      </label>
       <input type="password" name="password_confirmation" class="text-input">
     </div>
 

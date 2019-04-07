@@ -7,5 +7,7 @@
   "website_search": "/search",
   "website_terms": "/terms",
   "platform_index": "/platform",
-  "platform_submission": "/platform/submission"
+  "platform_submission": "/platform/submission",
+  "platform_password": "/platform/password",
+  "platform_logout": "/platform/logout"
 }

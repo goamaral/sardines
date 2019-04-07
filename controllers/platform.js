@@ -1,14 +1,14 @@
 import express from 'express'
-import { render_view, auth } from '../utils'
+import { render_view, auth, hash_password } from '../utils'
 import routes from '../routes.json'
-import { Submission } from '../models'
+import { Submission, User } from '../models'
 
 let router = express.Router()
 
 router.use(auth)
 
 router.get('/', (_, res) => {
-  render_view(res, 'platform/index')
+  render_view(res, 'platform/index', { errors: {} })
 })
 
 router.get('/submission', (_, res) => {
@@ -49,6 +49,33 @@ router.post('/submission', async (req, res) => {
 
     render_view(res, 'platform/submission', { errors })
   }
+})
+
+router.get('/password', (_, res) => {
+  res.redirect('platform/index')
+})
+
+router.post('/password', async (req, res) => {
+  let password = req.body.password
+  let password_confirmation = req.body.password_confirmation
+  let errors = {}
+
+  if (password.length < 8) errors["password_password"] = "Password tem que ter pelo menos 8 caracteres"
+  if (password != password_confirmation) errors["password_password_confirmation"] = "Passwords não são iguais"
+
+  try {
+    let user = await User.findById(req.session.user_id)
+    user.password = hash_password(password)
+    user.save()
+  } catch {}
+
+  render_view(res, 'platform/index', { errors })
+})
+
+router.get('/logout', (req, res) => {
+  req.session.user_id = null
+
+  res.redirect(routes["website_index"])
 })
 
 export default router
