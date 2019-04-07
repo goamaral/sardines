@@ -1,7 +1,19 @@
-<% if (submission) { %>
-  <%= submission.expression %>
-  <%= submission.description %>
-  <%= submission.origin %>
-<% } else { %>
-  <p>Como é que é?<p>
-<% } %>
+<div class="submission_expression">
+  <div class="expression-grid">
+    <% if (submission) { %>
+      <div class="expression_title">
+        <h1><%= submission.expression %></h1>
+      </div>
+      <div class="expression_description">
+        <p class="sub_title">Descrição</p>
+        <%= submission.description %>
+      </div>
+      <div class="expression_origin">
+        <p class="sub_title">Origem</p>
+        <p>&#9758; <%= submission.origin %></p>
+      </div>
+    <% } else { %>
+      <p>Como é que é?<p>
+    <% } %>
+  </div>
+</div>
