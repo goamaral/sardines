@@ -57,6 +57,7 @@ a
   align-items: center;
   text-align: center;
   background-color: #F2EFE8;
+  transition: 0.2s ease-in-out;
 }
 
 .card_1
@@ -354,4 +355,9 @@ a{
 {
   font-weight: 600;
   padding-bottom: 20px;
+}
+
+.card:hover
+{
+  transform: scale(1.03);
 }
