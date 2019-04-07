@@ -1,8 +1,19 @@
-<a href="<%= routes['website_sign_in'] %>">Login</a>
-<a href="<%= routes['website_sign_up'] %>">Register</a>
+<div class="nav">
+  <a class="nav_link" href="<%= routes['website_sign_in'] %>">ENTRAR</a>
+  <a class="nav_link" href="<%= routes['website_sign_up'] %>">REGISTAR </a>
+</div>
 
 <div class="grid-homepage">
+  <div class="title">
+    <p>ALMANAQUE DA SARDINHA</p>
+  </div>
   <div class="search">
+    <form class="form_search" action="<%= routes['website_search'] %>">
+      <input type="text" name="search" placeholder="COMO É QUE É?" class="placeholder"/>
+      <div class="search_input" onclick="this.parent.submit()">
+        <i class="fas fa-search"></i>
+      </div>
+    </form>
   </div>
 </div>
 

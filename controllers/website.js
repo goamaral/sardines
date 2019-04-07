@@ -81,4 +81,18 @@ router.get('/submission/:slug', async (req, res) => {
   }
 })
 
+router.get('/search', async (req, res) => {
+  let submissions = false
+  try {
+    submissions = await Submission.find({ expression: { "$regex": req.query.search } }).limit(10)
+    render_view(res, 'website/search', { submissions })
+  } catch {
+    render_view(res, 'website/search', { submissions })
+  }
+})
+
+router.get('/forgot_password', (_, res) => {
+  render_view(res, 'website/forgot_password')
+})
+
 export default router
