@@ -92,7 +92,7 @@ a
 
 .submission
 {
-  background-color: #586FAE;
+  background-color: #27A4ED;
   width: 100vw;
   height: 200vh;
   display: flex;
@@ -166,7 +166,7 @@ input[type=text]
   background-color: #F2EFE8;
   font-size: 20px;
   font-style: "Roboto";
-  padding-left: 20px;
+  /* padding-left: 20px; */
 }
 
 input[type=email]
@@ -177,17 +177,18 @@ input[type=email]
   background-color: #F2EFE8;
   font-size: 20px;
   font-style: "Roboto";
-  padding-left: 20px;
+  /* padding-left: 20px; */
 }
 
 textarea
 {
-  width: 100%;
+  width: 90%;
   border: 5px solid #3A3C43;
   background-color: #F2EFE8;
   font-size: 20px;
   font-style: "Roboto";
-  padding-left: 8px;
+  padding-right: 40px;
+  padding-left: 40px;
   padding-top: 8px;
 }
 
