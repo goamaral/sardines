@@ -11,6 +11,11 @@ body
   background-color:#E8DDC9;
 }
 
+a
+{
+  text-decoration: none;
+}
+
 .grid-container
 {
   display: grid;
@@ -213,4 +218,14 @@ input[type=password]
 
 a{
   color:#3A3C43;
+}
+
+.grid-homepage
+{
+  background-image: url("/sardine_light_blue.png");
+  background-size: cover;
+  height: 137vh;
+  width: 100%;
+  margin-bottom: 40px;
+  /* border: 10px solid #3A3C43; */
 }
