@@ -1,62 +1,38 @@
-<!-- <h1>Registar</h1>
-
-<form action="<%= routes['website_sign_up'] %>" method="POST">
-  <label for="email">Email<%= errors["email"] ? ` (${errors["email"]})` : '' %></label>
-  <input type="email" name="email">
-
-  <br>
-  <label for="username">Username<%= errors["username"] ? ` (${errors["username"]})` : '' %></label>
-  <input type="text" name="username">
-
-  <br>
-  <label for="password">Password<%= errors["password"] ? ` (${errors["password"]})` : '' %></label>
-  <input type="password" name="password">
-
-  <br>
-  <label for="password_confirmation">
-    Confirmação password
-    <%= errors["password_confirmation"] ? ` (${errors["password_confirmation"]})` : '' %>
-  </label>
-  <input type="password" name="password_confirmation">
-
-  <p>
-    <%= errors["terms_accepted"] ? `(${errors["terms_accepted"]})` : '' %>
-    <input type="checkbox" name="terms_accepted">
-    Aceito os <a href="<%= routes['website_terms'] %>">termos</a>
-  </p>
-
-  <input type="submit" value="Registar">
-</form> -->
-
 <div class="submission">
   <div class="grid-submission">
 
   <form action="<%= routes['website_sign_up'] %>" method="post" >
     <div class="submission-title">REGISTO</div>
+
     <div class="expression">
-      <label for="username">Email<%= errors["email"] ? ` (${errors["email"]})` : '' %></label>
-      <input type="text" name="email" class="text-input">
+      <label for="email">Email<%= errors["email"] ? ` (${errors["email"]})` : '' %></label>
+      <input type="email" name="email" class="text-input">
     </div>
+
     <div class="description">
       <label for="username">Username<%= errors["username"] ? ` (${errors["username"]})` : '' %></label>
       <input type="text" name="username" class="text-input">
     </div>
+
     <div class="description">
       <label for="password">Palavra-Passe<%= errors["password"] ? ` (${errors["password"]})` : '' %></label>
       <input type="password" name="password" class="text-input">
     </div>
+
     <div class="description">
       <label for="password_confirmation">Confirmação password
       <%= errors["password_confirmation"] ? ` (${errors["password_confirmation"]})` : '' %>
-      <input type="password" name="password" class="text-input">
+      <input type="password" name="password_confirmation" class="text-input">
     </div>
+
     <div class="description">
-    <p class="recovery">
-      <%= errors["terms_accepted"] ? `(${errors["terms_accepted"]})` : '' %>
-      <input type="checkbox" name="terms_accepted" class="recovery">
-      Aceito os <a href="<%= routes['website_terms'] %>">termos</a>
-    </p>
+      <p class="recovery">
+        <input type="checkbox" name="terms_accepted" class="recovery">
+        Aceito os <a href="<%= routes['website_terms'] %>">termos</a>
+        <%= errors["terms_accepted"] ? `(${errors["terms_accepted"]})` : '' %>
+      </p>
     </div>
+
     <div class="submit">
       <input type="submit" value="REGISTAR">
     </div>
