@@ -2,6 +2,8 @@ import express from 'express'
 import { render_view, hash_password, compare_password } from '../utils'
 import routes from '../routes.json'
 import { User, Submission } from '../models'
+import { send_forgot_password_email } from '../mailer'
+import password_generator from 'generate-password'
 
 let router = express.Router()
 
@@ -92,7 +94,21 @@ router.get('/search', async (req, res) => {
 })
 
 router.get('/forgot_password', (_, res) => {
-  render_view(res, 'website/forgot_password')
+  render_view(res, 'website/forgot_password', { email_sent: false })
+})
+
+router.post('/forgot_password', async (req, res) => {
+  try {
+    let user = await User.findOne({ email: req.body.email })
+    let new_password = password_generator.generate({ length: 10, numbers: true })
+    user.password = hash_password(new_password)
+    user.save()
+    await send_forgot_password_email(req.body.email, new_password)
+  } catch (err) {
+    console.log("FAILED TO SEND EMAIL " + err)
+  }
+
+  render_view(res, 'website/forgot_password', { email_sent: true })
 })
 
 export default router
