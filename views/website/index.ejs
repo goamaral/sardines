@@ -1,6 +1,13 @@
 <a href="<%= routes['website_sign_in'] %>">Login</a>
 <a href="<%= routes['website_sign_up'] %>">Register</a>
 
+<form action="<%= routes['website_search'] %>">
+  <input type="text" name="search" />
+  <input type="submit" value="Procurar" />
+</form>
+
+<br>
+
 <div class="grid-container">
   <div class="header">RECENTES</div>
   <% recent_submissions.forEach((submission, i) => { %>
