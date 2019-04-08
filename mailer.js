@@ -1,10 +1,12 @@
 import mailer from '@sendgrid/mail'
-import env from './env.json'
+import dotenv from 'dotenv'
 
-mailer.setApiKey(env.sendgrid_key)
+dotenv.config()
+
+mailer.setApiKey(process.env.SENDGRID_KEY)
 
 let default_mailer_options = {
-  from: env.mailer_sender_email
+  from: process.env.MAILER_FROM
 }
 
 const send_forgot_password_email = (email, password) => {

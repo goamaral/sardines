@@ -2,13 +2,15 @@ import mongoose from 'mongoose'
 import bluebird from 'bluebird'
 import User from './User'
 import Submission from './Submission'
-import env from '../env.json'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 mongoose.Promise = bluebird
 
-mongoose.connect(env["mongo_url"], { useNewUrlParser: true });
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true });
 
-console.log(`Connected to mongo at ${env["mongo_url"]}`)
+console.log(`Connected to mongo at ${process.env.MONGO_URL}`)
 
 export {
   User,
