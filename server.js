@@ -3,6 +3,9 @@ import controllers from './controllers'
 import db from './models'
 import session from 'express-session'
 import mongoose from 'mongoose'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const app = express()
 app.set('view engine', 'ejs')
@@ -24,7 +27,7 @@ app.use('/', controllers.website)
 app.use('/platform', controllers.platform)
 
 app.on('close', () => db.disconnect())
-app.listen(3000)
+app.listen(process.env.PORT)
 
 console.log("Listening on port 3000")
 
