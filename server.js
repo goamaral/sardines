@@ -18,8 +18,7 @@ app.use(express.static('public'))
 app.use(session({
   secret: 'gogocat',
   resave: false,
-  saveUninitialized: true,
-  user_id: mongoose.Types.ObjectId("5ca8c675dc59c21e25fafec4")
+  saveUninitialized: true
 }))
 
 // Routing
