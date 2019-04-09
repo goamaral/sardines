@@ -1,10 +1,11 @@
 import express from 'express'
-import { render_view, auth, hash_password } from '../utils'
+import { render_view, auth, hash_password, sanitize_input } from '../utils'
 import routes from '../routes.json'
 import { Submission, User } from '../models'
 
 let router = express.Router()
 
+router.use(sanitize_input)
 router.use(auth)
 
 router.get('/', (_, res) => {
@@ -20,7 +21,7 @@ router.post('/submission', async (req, res) => {
   let origin = req.body.origin == "" ? "Desconhecida" : req.body.origin
   let slug = req.body.expression.trim()
     .toLowerCase()
-    .replace(/[^a-zA-Z0-9 _]/, "")
+    .replace(/[^a-zA-Z0-9 ]/, "")
     .replace(/\s/g, "_")
 
   let params = {

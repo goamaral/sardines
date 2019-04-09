@@ -3,6 +3,8 @@ import path from 'path'
 import fs from 'fs'
 import routes from './routes.json'
 import bcrypt from 'bcrypt'
+import User from './models/User.js'
+import sanitizer from 'mongo-sanitize'
 
 const SALT_ROUNDS = 10
 
@@ -34,4 +36,18 @@ const auth = (req, res, next) => {
   }
 }
 
-export { render_view, hash_password, compare_password, auth }
+const admin_auth = async (req, res, next) => {
+  let user = await User.find(req.session.user_id)
+  if (!user.is_admin) {
+    res.redirect(routes['website_sign_in'])
+  } else {
+    next()
+  }
+}
+
+const sanitize_input = (req, _, next) => {
+  req.body = sanitizer(req.body)
+  next()
+}
+
+export { render_view, hash_password, compare_password, auth, admin_auth, sanitize_input }

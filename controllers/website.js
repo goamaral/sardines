@@ -1,11 +1,13 @@
 import express from 'express'
-import { render_view, hash_password, compare_password } from '../utils'
+import { render_view, hash_password, compare_password, sanitize_input } from '../utils'
 import routes from '../routes.json'
 import { User, Submission } from '../models'
 import { send_forgot_password_email } from '../mailer'
 import password_generator from 'generate-password'
 
 let router = express.Router()
+
+router.use(sanitize_input)
 
 router.get('/', async (_, res) => {
   let recent_submissions = await Submission.find().sort({ created_at: -1 }).limit(6)
@@ -85,8 +87,13 @@ router.get('/submission/:slug', async (req, res) => {
 
 router.get('/search', async (req, res) => {
   let submissions = false
+  let query = req.query.search.trim()
+    .toLowerCase()
+    .replace(/[^a-zA-Z0-9 ]/, "")
+    .replace(/\s/g, "_")
+
   try {
-    submissions = await Submission.find({ expression: { "$regex": req.query.search } }).limit(10)
+    submissions = await Submission.find({ expression: { "$regex": query } }).limit(10)
     render_view(res, 'website/search', { submissions })
   } catch {
     render_view(res, 'website/search', { submissions })

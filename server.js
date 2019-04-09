@@ -2,7 +2,6 @@ import express from 'express'
 import controllers from './controllers'
 import db from './models'
 import session from 'express-session'
-import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 
 dotenv.config()
@@ -24,6 +23,7 @@ app.use(session({
 // Routing
 app.use('/', controllers.website)
 app.use('/platform', controllers.platform)
+app.use('/admin', controllers.admin)
 
 app.on('close', () => db.disconnect())
 app.listen(process.env.PORT)
