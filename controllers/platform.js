@@ -18,7 +18,6 @@ router.get('/submission', (_, res) => {
 
 router.post('/submission', async (req, res) => {
   let errors = {}
-  let origin = req.body.origin == "" ? "Desconhecida" : req.body.origin
   let slug = req.body.expression.trim()
     .toLowerCase()
     .replace(/[^a-zA-Z0-9 ]/, "")
@@ -26,7 +25,6 @@ router.post('/submission', async (req, res) => {
 
   let params = {
     slug,
-    origin,
     expression: req.body.expression,
     description: req.body.description,
     user_id: req.session.user_id

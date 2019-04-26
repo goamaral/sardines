@@ -27,7 +27,12 @@ router.post('/sign_in', async (req, res) => {
       render_view(res, 'website/sign_in', { errors: { password: "Incorrect password" } })
     } else {
       req.session.user_id = user.id
-      res.redirect(routes['platform_index'])
+
+      if (user.is_admin) {
+        res.redirect(routes['admin_index'])
+      } else {
+        res.redirect(routes['platform_index'])
+      }
     }
   } catch {
     render_view(res, 'website/sign_in', { errors: { password: "Incorrect password" } })

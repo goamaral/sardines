@@ -37,7 +37,7 @@ const auth = (req, res, next) => {
 }
 
 const admin_auth = async (req, res, next) => {
-  let user = await User.find(req.session.user_id)
+  let user = await User.findOne({ _id: req.session.user_id })
   if (!user.is_admin) {
     res.redirect(routes['website_sign_in'])
   } else {

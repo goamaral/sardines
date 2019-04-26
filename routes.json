@@ -6,8 +6,12 @@
   "website_submission": "/submission",
   "website_search": "/search",
   "website_terms": "/terms",
+
   "platform_index": "/platform",
   "platform_submission": "/platform/submission",
   "platform_password": "/platform/password",
-  "platform_logout": "/platform/logout"
+  "platform_logout": "/platform/logout",
+
+  "admin_index": "/admin",
+  "admin_users": "/admin/users"
 }
