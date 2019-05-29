@@ -3,7 +3,7 @@ import controllers from './controllers'
 import db from './models'
 import dotenv from 'dotenv'
 import session from 'express-session'
-import redis_store from './redis'
+import redis_store, { client as redis_client } from './redis'
 
 dotenv.config()
 
@@ -31,7 +31,11 @@ app.use('/', controllers.website)
 app.use('/platform', controllers.platform)
 app.use('/admin', controllers.admin)
 
-app.on('close', () => db.disconnect())
+app.on('close', () => {
+  redis_client.quit()
+  db.close()
+})
+
 app.listen(port)
 
 console.log("Listening on port", port)
