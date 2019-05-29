@@ -1,8 +1,9 @@
 import express from 'express'
 import controllers from './controllers'
 import db from './models'
-import session from 'cookie-session'
 import dotenv from 'dotenv'
+import session from 'express-session'
+import redis_store from './redis'
 
 dotenv.config()
 
@@ -17,8 +18,12 @@ app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(express.static('public'))
 app.use(session({
-  name: 'gogocat',
-  secret: process.env.SESSION_SECRET
+  name: 'sardines',
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true },
+  store: redis_store
 }))
 
 // Routing

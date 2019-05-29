@@ -8,11 +8,15 @@ dotenv.config()
 
 mongoose.Promise = bluebird
 
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true });
+const connection = mongoose.createConnection(process.env.MONGO_URL, { useNewUrlParser: true });
+connection.on('connected', () => console.log(`Connected to MongoDB at ${process.env.MONGO_URL}`))
+connection.on('error', err => console.log(`Failed to connect to MongoDB (${err})`))
 
-console.log(`Connected to mongo at ${process.env.MONGO_URL}`)
-
-export {
+export default {
   User,
   Submission
+}
+
+export {
+  connection
 }
