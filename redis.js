@@ -7,13 +7,14 @@ import bluebird from 'bluebird'
 dotenv.config()
 bluebird.promisifyAll(redis)
 
-const client = redis.createClient()
+const host = process.env.REDIS_HOST || 'localhost'
+const port = process.env.REDIS_PORT || 6379
+
+console.log("REDIS_HOST", process.env.REDIS_HOST)
+
+const client = redis.createClient(port, host)
 const Store = bind_to_redis(session)
-const config = {
-  host: process.env.REDIS_HOST || 'localhost',
-  port: process.env.REDIS_PORT || 6379,
-  client
-}
+const config = { host, port, client }
 
 client.on('connect', () => console.log(`Connected to Redis at ${config.host}:${config.port}`))
 client.on('error', err => console.log(`Failed to connect to redis (${err})`))

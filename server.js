@@ -9,6 +9,7 @@ dotenv.config()
 
 const app = express()
 const port = process.env.PORT || 3000
+const host = process.env.HOST || 'localhost'
 
 app.set('view engine', 'ejs')
 app.set('views', './views')
@@ -22,7 +23,7 @@ app.use(session({
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true },
+  cookie: { secure: process.env.ENV == "production" },
   store: redis_store
 }))
 
@@ -36,8 +37,8 @@ app.on('close', () => {
   db.close()
 })
 
-app.listen(port)
+app.listen(port, host)
 
-console.log("Listening on port", port)
+console.log("Started server at", `${host}:${port}`)
 
 export default app

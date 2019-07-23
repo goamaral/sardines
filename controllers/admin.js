@@ -14,7 +14,17 @@ router.get('/', (_, res) => {
 
 router.get('/users', async (_, res) => {
   let users = await User.find().sort({ created_at: -1 })
-  render_view(res, 'admin/users', { users })
+  render_view(res, 'admin/users/index', { users })
+})
+
+router.get('/users/:username', async (req, res) => {
+  let user = await User.findOne({ username: req.params.username })
+
+  if (user) {
+    render_view(res, 'admin/users/show', { user })
+  } else {
+    res.redirect('/admin/users')
+  }
 })
 
 export default router

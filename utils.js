@@ -11,11 +11,12 @@ const SALT_ROUNDS = 10
 const render_view = (res, slug, view_props={}) => {
   const view_file_path = path.join(__dirname, 'views', slug + '.ejs')
   const view_file = fs.readFileSync(view_file_path, 'utf-8');
-  const content = ejs.render(view_file, { routes, ...view_props })
+  const default_props = { slug, routes, url_for }
+  const content = ejs.render(view_file, { ...default_props, ...view_props })
 
   const layout_file_path = path.join(__dirname, 'views', slug.split("/")[0], 'layout' + '.ejs')
 
-  ejs.renderFile(layout_file_path, { content, slug, routes }, (_, data) => {
+  ejs.renderFile(layout_file_path, { content, ...default_props }, (_, data) => {
     res.send(data)
   })
 }
@@ -38,7 +39,7 @@ const auth = (req, res, next) => {
 
 const admin_auth = async (req, res, next) => {
   let user = await User.findOne({ _id: req.session.user_id })
-  if (!user.is_admin) {
+  if (!user || !user.is_admin()) {
     res.redirect(routes['website_sign_in'])
   } else {
     next()
@@ -50,4 +51,13 @@ const sanitize_input = (req, _, next) => {
   next()
 }
 
-export { render_view, hash_password, compare_password, auth, admin_auth, sanitize_input }
+const url_for = (route, params = '') => {
+  let serialized_params = params
+  if (typeof params === 'object') {
+    serialized_params = Object.keys(params).map(key => `${key}=${params[key]}`).join('&')
+  }
+
+  return routes[route] + '/' + serialized_params
+}
+
+export { render_view, hash_password, compare_password, auth, admin_auth, sanitize_input, url_for }
