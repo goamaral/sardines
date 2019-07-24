@@ -13,5 +13,6 @@
   "platform_logout": "/platform/logout",
 
   "admin_index": "/admin",
-  "admin_users": "/admin/users"
+  "admin_users": "/admin/users",
+  "admin_users_edit": "/admin/users/edit"
 }

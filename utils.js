@@ -51,13 +51,10 @@ const sanitize_input = (req, _, next) => {
   next()
 }
 
-const url_for = (route, params = '') => {
-  let serialized_params = params
-  if (typeof params === 'object') {
-    serialized_params = Object.keys(params).map(key => `${key}=${params[key]}`).join('&')
-  }
+const url_for = (route, id = '', params = {}) => {
+  let serialized_params = Object.keys(params).map(key => `${key}=${params[key]}`).join('&')
 
-  return routes[route] + '/' + serialized_params
+  return routes[route] + (id.length == 0 ? '' : '/' + id) + (serialized_params.length == 0 ? '' : '?' + serialized_params)
 }
 
 export { render_view, hash_password, compare_password, auth, admin_auth, sanitize_input, url_for }

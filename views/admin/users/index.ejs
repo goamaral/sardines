@@ -16,8 +16,8 @@
       <td><%= user.email %></td>
       <td><%= user.role_name() %></td>
       <td><a href="<%= url_for('admin_users', user.username) %>">Show</a></td>
-      <td><a href="#">Edit</a></td>
-      <td><a href="#">Delete</a></td>
+      <td><a href="<%= url_for('admin_users_edit', user.username) %>">Edit</a></td>
+      <td><a href="#">UNSET Delete</a></td>
     </tr>
     <% }) %>
   </tbody>

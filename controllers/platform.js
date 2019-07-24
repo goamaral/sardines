@@ -32,12 +32,8 @@ router.post('/submission', async (req, res) => {
 
   try {
     await Submission.create(params)
-
-    if (Object.keys(errors).length) {
-      render_view(res, 'platform/submission', { errors })
-    } else {
-      res.redirect(routes['platform_index'])
-    }
+    
+    res.redirect(routes['platform_index'])
   } catch(err) {
     if (err.errors) {
       Object.keys(err.errors).forEach(e => {

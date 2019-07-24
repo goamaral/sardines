@@ -19,8 +19,19 @@ const schema = new Schema({
 
 schema.statics.roles = roles
 schema.statics.role_id = role_id
+schema.statics.roles = function() {
+  let role_mapping = {}
+  
+  roles.forEach(role => {
+    role_mapping[role] = role_id(role)
+  })
+
+  return role_mapping
+}
+
 schema.methods.role_name = function() { return roles[this.role] }
 schema.methods.is_admin = function() { return this.role == role_id("ADMIN") }
 schema.methods.is_moderator = function() { return this.role == role_id("MODERATOR") }
+
 
 export default mongoose.model('User', schema)
