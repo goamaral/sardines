@@ -20,6 +20,11 @@
     </select>
   </div>
 
+  <div>
+    <label>Password (Leave blank to keep password)<%= errors["password"] ? ` (${errors["password"]})` : '' %></label>
+    <input name="password" type="password" />
+  </div>
+
   <input type="submit" value="Update">
 </form>
 
