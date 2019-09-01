@@ -7,14 +7,12 @@ services:
         image: express
         volumes:
             - .:/project
-            - node_modules:/project/node_modules
+            - ./node_modules:/project/node_modules
         ports:
             - 3000:3000
         depends_on:
             - mongodb
             - redis
-        networks:
-            - general_network
 
     mongodb:
         container_name: sardines_mongodb
@@ -22,8 +20,6 @@ services:
         restart: always
         ports:
             - 27017:27017
-        networks:
-            - general_network
 
     redis:
         container_name: sardines_redis
@@ -31,12 +27,3 @@ services:
         restart: always
         ports:
             - 6379:6379
-        networks:
-            - general_network
-
-volumes:
-  node_modules:
-
-networks:
-    general_network:
-        driver: bridge

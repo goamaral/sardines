@@ -6,8 +6,6 @@ WORKDIR $INSTALL_PATH
 
 COPY . $INSTALL_PATH
 
-RUN npm install
-
 EXPOSE 3000
 
 ENTRYPOINT "./entrypoint.sh"

@@ -3,6 +3,7 @@
 # pkill -F /project/tmp/pids/server.pid
 # rm /project/tmp/pids/server.pid
 
+npm install
 npm run serve
 
 while true

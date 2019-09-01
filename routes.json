@@ -14,5 +14,6 @@
 
   "admin_index": "/admin",
   "admin_users": "/admin/users",
-  "admin_users_edit": "/admin/users/edit"
+  "admin_users_edit": "/admin/users/edit",
+  "admin_users_delete": "/admin/users/delete"
 }

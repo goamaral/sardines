@@ -86,4 +86,11 @@ router.post('/users/edit/:username', async (req, res) => {
   }
 })
 
+/* ADMIN USERS DELETE */
+router.post('/users/delete/:username', async (req, res) => {
+  await User.deleteOne({ username: req.params.username })
+  
+  res.redirect('/admin/users')
+})
+
 export default router
