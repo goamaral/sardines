@@ -30,4 +30,4 @@
 
 <p><a href="<%= url_for('admin_users') %>">Users</a></p>
 <p><a href="<%= url_for('admin_users', user.original_username) %>">Show</a></p>
-<p><a href="#">UNSET Delete</a></p>
+<p><a onclick="delete_confirmation('<%= url_for('admin_users_delete', user.username) %>')">Delete</a></p>
