@@ -4,6 +4,7 @@ import db from './models'
 import dotenv from 'dotenv'
 import session from 'express-session'
 import redis_store, { client as redis_client } from './redis'
+import { on_404_page } from './utils'
 
 dotenv.config()
 
@@ -31,6 +32,7 @@ app.use(session({
 app.use('/', controllers.website)
 app.use('/platform', controllers.platform)
 app.use('/admin', controllers.admin)
+app.use(on_404_page)
 
 app.on('close', () => {
   redis_client.quit()

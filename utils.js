@@ -13,7 +13,6 @@ const render_view = (res, slug, view_props={}) => {
   const view_file = fs.readFileSync(view_file_path, 'utf-8');
   const default_props = { slug, routes, url_for }
   const content = ejs.render(view_file, { ...default_props, ...view_props })
-
   const layout_file_path = path.join(__dirname, 'views', slug.split("/")[0], 'layout' + '.ejs')
 
   ejs.renderFile(layout_file_path, { content, ...default_props }, (_, data) => {
@@ -57,4 +56,11 @@ const url_for = (route, id = '', params = {}) => {
   return routes[route] + (id.length == 0 ? '' : '/' + id) + (serialized_params.length == 0 ? '' : '?' + serialized_params)
 }
 
-export { render_view, hash_password, compare_password, auth, admin_auth, sanitize_input, url_for }
+const on_404_page = (_, res, __) => {
+  render_view(res, "website/404")
+}
+
+export {
+  render_view, hash_password, compare_password, auth, admin_auth,
+  sanitize_input, url_for, on_404_page
+}
