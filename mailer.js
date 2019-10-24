@@ -6,7 +6,10 @@ dotenv.config()
 mailer.setApiKey(process.env.SENDGRID_KEY)
 
 let default_mailer_options = {
-  from: process.env.MAILER_FROM
+  from: {
+    name: process.env.MAILER_NAME_FROM,
+    email: process.env.MAILER_EMAIL_FROM
+  }
 }
 
 const send_forgot_password_email = (email, password) => {
@@ -17,4 +20,12 @@ const send_forgot_password_email = (email, password) => {
   })
 }
 
-export { send_forgot_password_email }
+const send_sign_up_thanks_email = email => {
+  mailer.send({
+    ...default_mailer_options, to: email,
+    subject: "Obrigado pelo registo!",
+    text: `A equipa do Almanaque da Sardinha agradece o teu registo.`
+  })
+}
+
+export { send_forgot_password_email, send_sign_up_thanks_email }

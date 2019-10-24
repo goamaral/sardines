@@ -1,29 +1,31 @@
 version: "3"
 
 services:
-    express:
-        container_name: sardines_express
-        build: .
-        image: express
-        volumes:
-            - .:/project
-            - ./node_modules:/project/node_modules
-        ports:
-            - 3000:3000
-        depends_on:
-            - mongodb
-            - redis
+    # express:
+    #     container_name: sardines_express
+    #     build: .
+    #     image: express
+    #     volumes:
+    #         - .:/project
+    #         - ./node_modules:/project/node_modules
+    #     ports:
+    #         - 3000:3000
+    #     depends_on:
+    #         - mongodb
+    #         - redis
 
     mongodb:
         container_name: sardines_mongodb
-        image: "mongo:latest"
-        restart: always
+        image: mongo
+        volumes:
+            - $HOME/.docker/data/mongodb:/data/db
         ports:
             - 27017:27017
 
     redis:
         container_name: sardines_redis
-        image: "redis:latest"
-        restart: always
+        image: redis
+        volumes:
+            - $HOME/.docker/data/redis:/data
         ports:
             - 6379:6379

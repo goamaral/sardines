@@ -2,7 +2,7 @@ import express from 'express'
 import { render_view, hash_password, compare_password, sanitize_input } from '../utils'
 import routes from '../routes.json'
 import { User, Submission } from '../models'
-import { send_forgot_password_email } from '../mailer'
+import { send_forgot_password_email, send_sign_up_thanks_email } from '../mailer'
 import password_generator from 'generate-password'
 
 let router = express.Router()
@@ -65,6 +65,7 @@ router.post('/sign_up', async (req, res) => {
     if (Object.keys(errors).length) {
       render_view(res, 'website/sign_up', { errors })
     } else {
+      send_sign_up_thanks_email(user.email)
       req.session.user_id = user.id
       res.redirect(routes['platform_index'])
     }
