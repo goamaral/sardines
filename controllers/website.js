@@ -40,18 +40,20 @@ router.post('/sign_in', async (req, res) => {
 })
 
 router.get('/sign_up', (_, res) => {
-  render_view(res, 'website/sign_up', { errors: {} })
+  render_view(res, 'website/sign_up', { user: new User() })
 })
 
 router.post('/sign_up', async (req, res) => {
+  let user = new User(req.body)
+
   let terms_accepted = req.body.terms_accepted
   let password = req.body.password
   let password_confirmation = req.body.password_confirmation
   let errors = {}
 
-  if (!terms_accepted) errors["terms_accepted"] = "Termos têm que ser aceites"
-  if (password.length < 8) errors["password"] = "Password tem que ter pelo menos 8 caracteres"
-  if (password != password_confirmation) errors["password_confirmation"] = "Passwords não são iguais"
+  // if (!terms_accepted) errors["terms_accepted"] = "Termos têm que ser aceites"
+  // if (password.length < 8) errors["password"] = "Password tem que ter pelo menos 8 caracteres"
+  // if (password != password_confirmation) errors["password_confirmation"] = "Passwords não são iguais"
 
   let params = {
     username: req.body.username,
@@ -78,7 +80,7 @@ router.post('/sign_up', async (req, res) => {
       errors["email"] = errors["username"] = "Utilizador já esxite"
     }
 
-    render_view(res, 'website/sign_up', { errors })
+    render_view(res, 'website/sign_up', { user })
   }
 })
 

@@ -1,4 +1,5 @@
 import mongoose, { Schema } from 'mongoose'
+import bcrypt from 'bcrypt'
 
 const roles = [
   "ADMIN",
@@ -6,15 +7,14 @@ const roles = [
   "REGULAR"
 ]
 
-const role_id =  function(role_name) {
-  return roles.indexOf(role_name)
-}
+const role_id = (role_name) => roles.indexOf(role_name)
 
 const schema = new Schema({
   email: { type: String, unique: true, required: [true, 'Email requerido'] },
   username: { type: String, unique: true, required: [true, 'Username requerido'] },
-  password: { type: String, required: [true, 'Password requrida'] },
-  role: { type: Number, default: role_id("REGULAR") },
+  password: { type: String, required: [true, 'Password requrida'], minlength: [8, "Password tem que ter pelo menos 8 caracteres"] },
+  role: { type: Number, default: role_id("REGULAR"), enum: [roles, "Role inválida"] },
+  terms_accepted: { type: Boolean, required: [true, "Termos têm que ser aceites"], default: false }
 })
 
 schema.statics.roles = roles
@@ -34,4 +34,38 @@ schema.methods.is_admin = function() { return this.role == role_id("ADMIN") }
 schema.methods.is_moderator = function() { return this.role == role_id("MODERATOR") }
 
 
-export default mongoose.model('User', schema)
+const model = mongoose.model('User', schema)
+
+export default class User {
+
+  static roles = roles
+  static role_id = role_id
+  static model = model
+  static SALT_ROUNDS = 10
+
+  errors = {}
+  params = {}
+  model_instance = null
+
+  constructor(params) {
+    params = params
+    model_instance = new model(params)
+  }
+
+  valid_sign_up() {
+    try {
+      this.model_instance.validate()
+      if (params.password != params.password_confirmation) errors["password_confirmation"] = "Passwords não são iguais"
+    } catch (e) {
+      
+    }
+  }
+
+  hash_password() {
+    return bcrypt.hashSync(password, SALT_ROUNDS)
+  }
+
+  compare_password(password, encrypted) {
+    return bcrypt.compareSync(password, encrypted)
+  }
+}

@@ -2,11 +2,8 @@ import ejs from 'ejs'
 import path from 'path'
 import fs from 'fs'
 import routes from './routes.json'
-import bcrypt from 'bcrypt'
 import User from './models/User.js'
 import sanitizer from 'mongo-sanitize'
-
-const SALT_ROUNDS = 10
 
 const render_view = (res, slug, view_props={}) => {
   const view_file_path = path.join(__dirname, 'views', slug + '.ejs')
@@ -18,14 +15,6 @@ const render_view = (res, slug, view_props={}) => {
   ejs.renderFile(layout_file_path, { content, ...default_props }, (_, data) => {
     res.send(data)
   })
-}
-
-const hash_password = password => {
-  return bcrypt.hashSync(password, SALT_ROUNDS)
-}
-
-const compare_password = (password, encrypted) => {
-  return bcrypt.compareSync(password, encrypted)
 }
 
 const auth = (req, res, next) => {
@@ -61,6 +50,6 @@ const on_404_page = (_, res, __) => {
 }
 
 export {
-  render_view, hash_password, compare_password, auth, admin_auth,
-  sanitize_input, url_for, on_404_page
+  render_view, auth, admin_auth, sanitize_input, url_for,
+  on_404_page
 }

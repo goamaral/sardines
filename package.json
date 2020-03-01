@@ -11,6 +11,7 @@
   "dependencies": {
     "@babel/core": "7.5.5",
     "@babel/node": "7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/preset-env": "7.5.5",
     "@sendgrid/mail": "6.4.0",
     "bcrypt": "3.0.6",
