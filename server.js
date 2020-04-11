@@ -1,46 +1,24 @@
-import express from 'express'
-import controllers from './controllers'
-import db from './models'
-import dotenv from 'dotenv'
-import session from 'express-session'
-import redis_store, { client as redis_client } from './redis'
-import { on_404_page } from './utils'
+const express = require('express')
+const next = require('next')
 
-dotenv.config()
+const dev = process.env.NODE_ENV !== 'production'
+const app = next({ dev })
+const handle = app.getRequestHandler()
 
-const app = express()
-const port = process.env.PORT || 3000
-const host = process.env.HOST || 'localhost'
+app.prepare()
+  .then(() => {
+    const server = express()
 
-app.set('view engine', 'ejs')
-app.set('views', './views')
-app.set('trust proxy', 1)
+    server.get('*', (req, res) => {
+      return handle(req, res)
+    })
 
-app.use(express.urlencoded({ extended: true }))
-app.use(express.json())
-app.use(express.static('public'))
-app.use(session({
-  name: 'sardines',
-  secret: process.env.SESSION_SECRET,
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: process.env.ENV == "production" },
-  store: redis_store
-}))
-
-// Routing
-app.use('/', controllers.website)
-app.use('/platform', controllers.platform)
-app.use('/admin', controllers.admin)
-app.use(on_404_page)
-
-app.on('close', () => {
-  redis_client.quit()
-  db.close()
-})
-
-app.listen(port, host)
-
-console.log("Started server at", `${host}:${port}`)
-
-export default app
+    server.listen(3000, (err) => {
+      if (err) throw err
+      console.log('> Ready on http://localhost:3000')
+    })
+  })
+  .catch((ex) => {
+    console.error(ex.stack)
+    process.exit(1)
+  })
