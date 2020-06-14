@@ -1,1 +1,4 @@
-We are Go Go Cat, and we will Go Go for you!
+# Sardines
+
+## Color Pallete
+https://coolors.co/f9eeda-005482-fe4a49
