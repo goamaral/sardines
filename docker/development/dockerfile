@@ -1,0 +1,21 @@
+FROM node:15.5-alpine3.12
+
+ENV APP_PATH /project
+ENV APP_BIN_PATH "$APP_PATH/bin"
+ENV PATH "$PATH:$APP_BIN_PATH"
+
+WORKDIR $APP_PATH
+
+COPY ./bin/install_system_dependencies $APP_BIN_PATH/install_system_dependencies
+RUN install_system_dependencies
+
+COPY package.json $APP_PATH
+COPY package-lock.json $APP_PATH
+COPY node_modules ${APP_PATH}/node_modules
+RUN npm install
+
+COPY . $APP_PATH
+
+CMD [ "sails", "lift" ]
+
+EXPOSE 3000

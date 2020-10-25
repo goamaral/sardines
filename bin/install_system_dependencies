@@ -1,0 +1,11 @@
+#! /bin/sh
+# General dependencies
+apk add --update zsh git openssh postgresql-dev sudo
+
+# User setup
+echo "sardines:x:1000:100::/project/docker/home:/bin/zsh" >> /etc/passwd
+echo "sardines ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/sardines
+chmod 0440 /etc/sudoers.d/sardines
+
+# Micro editor
+apk add --update micro --repository=http://dl-cdn.alpinelinux.org/alpine/edge/community
