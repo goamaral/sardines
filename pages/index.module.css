@@ -1,0 +1,17 @@
+.hero {
+  background-image: url("/images/sardine_light_blue.png");
+}
+
+.hero__head {
+  display: flex;
+  justify-content: center;
+}
+
+.hero__body {
+  display: flex;
+  justify-content: center;
+}
+
+.hero__body__box {
+  border: 5px solid;
+}
