@@ -1,0 +1,10 @@
+#!/usr/bin/env sh
+if [ ! -f "$HOME/.setup_complete" ]; then
+  touch "$HOME/.setup_complete"
+fi
+
+# Intall node modules
+npm install
+
+# Start server
+sails lift

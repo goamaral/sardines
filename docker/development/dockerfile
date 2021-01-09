@@ -9,13 +9,8 @@ WORKDIR $APP_PATH
 COPY ./bin/install_system_dependencies $APP_BIN_PATH/install_system_dependencies
 RUN install_system_dependencies
 
-COPY package.json $APP_PATH
-COPY package-lock.json $APP_PATH
-COPY node_modules ${APP_PATH}/node_modules
-RUN npm install
+USER user
 
 COPY . $APP_PATH
 
-CMD [ "sails", "lift" ]
-
-EXPOSE 3000
+ENTRYPOINT [ "entrypoint" ]

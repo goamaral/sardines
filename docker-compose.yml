@@ -7,7 +7,6 @@ services:
       dockerfile: docker/development/dockerfile
       context: .
     image: sardines_web
-    user: sardines
     volumes:
       - .:/project
     ports:
@@ -24,15 +23,10 @@ services:
       POSTGRES_PASSWORD: sardines
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
 
   mailhog:
     container_name: sardines-mailhog
     image: mailhog/mailhog
-    ports:
-      - 1025:1025
-      - 8025:8025
 
 volumes:
   postgres_data:

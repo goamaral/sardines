@@ -1,5 +1,9 @@
-node_modules/
-
+# Sails
 config/local.js
 .tmp/
+
+# NPM
+node_modules/
+
+# Docker
 docker/development/home/

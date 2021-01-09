@@ -1,0 +1,7 @@
+{
+  "name": "Ticketline SDK",
+  "dockerComposeFile": "../docker-compose.yml",
+  "service": "web",
+  "workspaceFolder": "/project",
+  "remoteUser": "user"
+}
