@@ -1,12 +1,12 @@
 version: '3'
 
 services:
-  web:
-    container_name: sardines-web
+  rails:
+    container_name: sardines-rails
     build:
-      dockerfile: docker/development/dockerfile
+      dockerfile: docker/development/Dockerfile
       context: .
-    image: sardines_web
+    image: sardines_rails
     volumes:
       - .:/project
     ports:

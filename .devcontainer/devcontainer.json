@@ -1,7 +1,7 @@
 {
   "name": "Sardines",
   "dockerComposeFile": "../docker-compose.yml",
-  "service": "web",
+  "service": "rails",
   "workspaceFolder": "/project",
   "remoteUser": "user"
 }

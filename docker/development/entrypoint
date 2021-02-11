@@ -1,0 +1,23 @@
+#! /bin/sh
+# INSTALL DEPENDENCIES #
+bundle install
+yarn install
+rails assets:precompile
+
+# CLEAN OLD DEPENDECIES, ASSETS AND LOGS #
+bundle clean
+yarn cache clean
+rails assets:clean
+rails log:clear
+rails tmp:clear
+
+# SETUP PROJECT #
+if [ ! -f "$HOME/.setup_complete" ]; then
+  rails db:create
+  rails db:schema:load
+  rails db:seed
+  touch "$HOME/.setup_complete"
+fi
+
+# START SERVER #
+puma
